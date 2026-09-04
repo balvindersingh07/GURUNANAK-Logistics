@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Create delivery redirect",
+    "pass": "PASS",
+    "actual": "http://localhost:5173/deliveries/6a9a4d3214f5af14669b7cb3",
+    "expected": ""
+  },
+  {
+    "name": "Forgot password POST",
+    "pass": "PASS",
+    "actual": "1",
+    "expected": ""
+  },
+  {
+    "name": "Driver POD UI visible (out_for_delivery)",
+    "pass": "FAIL",
+    "actual": "upload=0 canvas=0 delivery=6a996444a6b79ec226ed1029",
+    "expected": ""
+  },
+  {
+    "name": "Invalid JWT after navigation",
+    "pass": "PASS",
+    "actual": "url=http://localhost:5173/login token=cleared",
+    "expected": ""
+  },
+  {
+    "name": "Customer profile loads",
+    "pass": "PASS",
+    "actual": "http://localhost:5173/profile",
+    "expected": ""
+  }
+]

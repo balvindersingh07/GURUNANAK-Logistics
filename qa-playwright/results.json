@@ -1,0 +1,914 @@
+{
+  "frontendUrl": "http://localhost:5173",
+  "backendUrl": "http://localhost:5000",
+  "browser": "Chromium (headless)",
+  "playwrightVersion": "1.62.1",
+  "mongo": true,
+  "apiStatus": "ok",
+  "socketStatus": "tested via Live Tracking page (SIMULATED GPS)",
+  "total": 109,
+  "passed": 105,
+  "failed": 2,
+  "blocked": 2,
+  "passPct": 98.1,
+  "unexpectedConsoleErrors": 0,
+  "unexpectedFailedRequests": 1,
+  "consoleErrors": [],
+  "failedRequests": [
+    "GET http://localhost:5173/api/health — net::ERR_FAILED"
+  ],
+  "bugs": [
+    {
+      "id": "QA-1",
+      "severity": "P2",
+      "role": "Security",
+      "steps": "Unauthenticated /dashboard",
+      "expected": "redirect login",
+      "actual": "http://localhost:5173/customer/dashboard",
+      "component": "Security"
+    },
+    {
+      "id": "QA-2",
+      "severity": "P2",
+      "role": "Security",
+      "steps": "Invalid JWT logout behavior",
+      "expected": "redirect login or clear",
+      "actual": "http://localhost:5173/customer/dashboard",
+      "component": "Security"
+    }
+  ],
+  "results": [
+    {
+      "area": "Environment",
+      "test": "Frontend URL",
+      "expected": "HTTP 200",
+      "actual": "http://localhost:5173",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Environment",
+      "test": "Backend health",
+      "expected": "mongo true",
+      "actual": "{\"status\":\"ok\",\"service\":\"GURUNANAK Logistics API\",\"mongo\":true}",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Environment",
+      "test": "Login page HTTP",
+      "expected": "200",
+      "actual": "200",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Login form elements",
+      "expected": "email+password+button",
+      "actual": "email=1 pass=1 btn=1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin login redirect",
+      "expected": "/dashboard",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin user info",
+      "expected": "name+role visible",
+      "actual": "visible",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin sidebar + nav",
+      "expected": "render",
+      "actual": "fleet=true nav=2",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin refresh persists",
+      "expected": "/dashboard",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin",
+      "test": "Dashboard KPI/charts",
+      "expected": "render no NaN",
+      "actual": "cards=7 nan=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "List renders",
+      "expected": "rows visible",
+      "actual": "8",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Search filter",
+      "expected": "results change",
+      "actual": "before=8 after=8",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Status filter",
+      "expected": "select works",
+      "actual": "applied",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Pagination next",
+      "expected": "next page",
+      "actual": "no next button",
+      "pass": "BLOCKED",
+      "evidence": "single page or hidden"
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Delivery details",
+      "expected": "page loads",
+      "actual": "http://localhost:5173/deliveries/6a9a51a3363101901a1cda37",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Create validation",
+      "expected": "blocks empty form",
+      "actual": "blocked",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Create delivery",
+      "expected": "redirect to details",
+      "actual": "http://localhost:5173/deliveries/6a9a5207363101901a1cdbe3",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Create persistence",
+      "expected": "survives refresh",
+      "actual": "http://localhost:5173/deliveries/6a9a5207363101901a1cdbe3",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Fleet",
+      "test": "Fleet list",
+      "expected": "page loads",
+      "actual": "20",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Drivers",
+      "test": "Driver profile",
+      "expected": "loads",
+      "actual": "http://localhost:5173/drivers/6a995caca008ba1abf34f197",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Reports",
+      "test": "Reports page",
+      "expected": "loads no NaN",
+      "actual": "nan=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Reports",
+      "test": "GET /api/reports/summary",
+      "expected": "called in online mode",
+      "actual": "http://localhost:5173/api/reports/summary",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Notifications",
+      "test": "Notifications visible",
+      "expected": "list items",
+      "actual": "25",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Notifications",
+      "test": "Mark all read",
+      "expected": "works",
+      "actual": "clicked",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Settings",
+      "test": "Settings save interaction",
+      "expected": "toast/no error",
+      "actual": "http://localhost:5173/settings",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Tracking",
+      "test": "Leaflet map",
+      "expected": "renders",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Tracking",
+      "test": "Map markers/route",
+      "expected": "visible",
+      "actual": "4",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Tracking",
+      "test": "GPS source",
+      "expected": "SIMULATED GPS",
+      "actual": "SIMULATED GPS (trackingSimulator)",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Tracking",
+      "test": "Simulator wait 35s",
+      "expected": "no crash",
+      "actual": "http://localhost:5173/tracking",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Logout redirect",
+      "expected": "/login",
+      "actual": "http://localhost:5173/login",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Protected after logout",
+      "expected": "redirect login",
+      "actual": "http://localhost:5173/login",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Token cleared on logout",
+      "expected": "empty/null",
+      "actual": "cleared",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Login",
+      "expected": "/dashboard",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Nav: Dashboard",
+      "expected": "visible",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Nav: Deliveries",
+      "expected": "visible",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Nav: Live Tracking",
+      "expected": "visible",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Nav: Routes",
+      "expected": "visible",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Nav: Reports",
+      "expected": "visible",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Nav: Notifications",
+      "expected": "visible",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Fleet hidden in sidebar",
+      "expected": "count=0",
+      "actual": "0",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Direct /fleet blocked",
+      "expected": "redirect away",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Drivers hidden in sidebar",
+      "expected": "count=0",
+      "actual": "0",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Direct /drivers blocked",
+      "expected": "redirect away",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Customers hidden in sidebar",
+      "expected": "count=0",
+      "actual": "0",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Direct /customers blocked",
+      "expected": "redirect away",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Settings hidden in sidebar",
+      "expected": "count=0",
+      "actual": "0",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Direct /settings blocked",
+      "expected": "redirect away",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Dispatcher",
+      "test": "Create delivery page",
+      "expected": "accessible",
+      "actual": "http://localhost:5173/deliveries/new",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Driver",
+      "test": "Login",
+      "expected": "/driver/dashboard",
+      "actual": "http://localhost:5173/driver/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Driver/POD",
+      "test": "Photo+signature visible together",
+      "expected": "both present",
+      "actual": "upload=1 canvas=1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Driver/POD",
+      "test": "Full POD flow",
+      "expected": "delivery prepared",
+      "actual": "no podTestDeliveryId",
+      "pass": "BLOCKED",
+      "evidence": "API prep failed"
+    },
+    {
+      "area": "Driver/POD Negative",
+      "test": "Delivered without POD",
+      "expected": "UI blocks or 400",
+      "actual": "UI toast block",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Customer",
+      "test": "Login",
+      "expected": "/customer/dashboard",
+      "actual": "http://localhost:5173/customer/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Customer",
+      "test": "Own tracking by ID",
+      "expected": "loads",
+      "actual": "http://localhost:5173/customer/tracking/GNK202603011000",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Customer",
+      "test": "Other customer tracking blocked",
+      "expected": "403/404/redirect",
+      "actual": "Dashboard\nTrack Delivery\nNotifications\nHelp & Support\nProfile\nUser Profile\nLogout\n3\nA\n\nAnita Mehta\n\n",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Customer",
+      "test": "Notifications page",
+      "expected": "loads",
+      "actual": "http://localhost:5173/notifications",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Customer",
+      "test": "Support page",
+      "expected": "loads",
+      "actual": "http://localhost:5173/support",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Customer",
+      "test": "Profile page",
+      "expected": "loads",
+      "actual": "http://localhost:5173/profile",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Forgot Password",
+      "test": "API called",
+      "expected": "POST",
+      "actual": "POST",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Forgot Password",
+      "test": "Generic message",
+      "expected": "no enumeration",
+      "actual": "generic",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Register",
+      "test": "Form fields",
+      "expected": "visible",
+      "actual": "6",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Register",
+      "test": "Validation on incomplete",
+      "expected": "errors shown",
+      "actual": "attempted",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Security",
+      "test": "Unauthenticated /dashboard",
+      "expected": "redirect login",
+      "actual": "http://localhost:5173/customer/dashboard",
+      "pass": "FAIL",
+      "evidence": ""
+    },
+    {
+      "area": "Security",
+      "test": "Invalid JWT logout behavior",
+      "expected": "redirect login or clear",
+      "actual": "http://localhost:5173/customer/dashboard",
+      "pass": "FAIL",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/login",
+      "expected": "public: admin logged in → dashboard",
+      "actual": "http://localhost:5173/login",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/register",
+      "expected": "public: loads or redirects",
+      "actual": "http://localhost:5173/register",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/forgot-password",
+      "expected": "public: loads",
+      "actual": "http://localhost:5173/forgot-password",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/reset-password",
+      "expected": "public: loads",
+      "actual": "http://localhost:5173/reset-password",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/dashboard",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/deliveries",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/deliveries",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/deliveries/new",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/deliveries/new",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/deliveries/create",
+      "expected": "admin: loads alias",
+      "actual": "http://localhost:5173/deliveries/create",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/tracking",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/tracking",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/fleet",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/fleet",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/drivers",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/drivers",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/customers",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/customers",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/routes",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/routes",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/reports",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/reports",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/notifications",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/notifications",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/settings",
+      "expected": "admin: loads",
+      "actual": "http://localhost:5173/settings",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/profile",
+      "expected": "any: loads",
+      "actual": "http://localhost:5173/profile",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/support",
+      "expected": "any: loads",
+      "actual": "http://localhost:5173/support",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/deliveries/:id",
+      "expected": "loads",
+      "actual": "http://localhost:5173/deliveries/6a9a51a3363101901a1cda37",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/fleet/:id",
+      "expected": "loads",
+      "actual": "http://localhost:5173/fleet/6a995caca008ba1abf34f180",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/drivers/:id",
+      "expected": "loads",
+      "actual": "http://localhost:5173/drivers/6a995caca008ba1abf34f197",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/customers/:id",
+      "expected": "loads",
+      "actual": "http://localhost:5173/customers/6a995caca008ba1abf34f16f",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/driver/dashboard (as admin)",
+      "expected": "redirect/blocked",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Routes",
+      "test": "/customer/dashboard (as admin)",
+      "expected": "redirect/blocked",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1440 login",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1440 dashboard",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1440 deliveries",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1440 tracking",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1280 login",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1280 dashboard",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1280 deliveries",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "desktop-1280 tracking",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "tablet-768 login",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "tablet-768 dashboard",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "tablet-768 deliveries",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "tablet-768 tracking",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "mobile-390 login",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "mobile-390 dashboard",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "mobile-390 deliveries",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "mobile-390 tracking",
+      "expected": "no horizontal overflow",
+      "actual": "overflow=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "mobile-390 driver delivery",
+      "expected": "loads",
+      "actual": "http://localhost:5173/login",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Responsive",
+      "test": "mobile-390 customer tracking",
+      "expected": "loads",
+      "actual": "http://localhost:5173/login",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Offline",
+      "test": "Demo fallback button",
+      "expected": "visible when API blocked",
+      "actual": "1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Offline",
+      "test": "Demo login",
+      "expected": "dashboard",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Offline",
+      "test": "Mock deliveries load",
+      "expected": "data visible",
+      "actual": "10",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Offline",
+      "test": "Restore online mode",
+      "expected": "API reachable after unroute",
+      "actual": "reloaded",
+      "pass": "PASS",
+      "evidence": ""
+    }
+  ]
+}

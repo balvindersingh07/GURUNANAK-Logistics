@@ -1,0 +1,192 @@
+{
+  "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: /Save/i }).first()\n",
+  "passed": 22,
+  "failed": 0,
+  "blocked": 1,
+  "results": [
+    {
+      "area": "Environment",
+      "test": "Frontend URL",
+      "expected": "HTTP 200",
+      "actual": "http://localhost:5173",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Environment",
+      "test": "Backend health",
+      "expected": "mongo true",
+      "actual": "{\"status\":\"ok\",\"service\":\"GURUNANAK Logistics API\",\"mongo\":true}",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Environment",
+      "test": "Login page HTTP",
+      "expected": "200",
+      "actual": "200",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Login form elements",
+      "expected": "email+password+button",
+      "actual": "email=1 pass=1 btn=1",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin login redirect",
+      "expected": "/dashboard",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin user info",
+      "expected": "name+role visible",
+      "actual": "visible",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin sidebar + nav",
+      "expected": "render",
+      "actual": "fleet=true nav=2",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Authentication",
+      "test": "Admin refresh persists",
+      "expected": "/dashboard",
+      "actual": "http://localhost:5173/dashboard",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin",
+      "test": "Dashboard KPI/charts",
+      "expected": "render no NaN",
+      "actual": "cards=7 nan=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "List renders",
+      "expected": "rows visible",
+      "actual": "8",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Search filter",
+      "expected": "results change",
+      "actual": "before=8 after=8",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Status filter",
+      "expected": "select works",
+      "actual": "applied",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Pagination next",
+      "expected": "next page",
+      "actual": "no next button",
+      "pass": "BLOCKED",
+      "evidence": "single page or hidden"
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Delivery details",
+      "expected": "page loads",
+      "actual": "http://localhost:5173/deliveries/6a9a3b6a386fc39ede51e0f8",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Create validation",
+      "expected": "blocks empty form",
+      "actual": "blocked",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Create delivery",
+      "expected": "redirect to details",
+      "actual": "http://localhost:5173/deliveries/6a9a4bba14f5af14669b78ec",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Deliveries",
+      "test": "Create persistence",
+      "expected": "survives refresh",
+      "actual": "http://localhost:5173/deliveries/6a9a4bba14f5af14669b78ec",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Fleet",
+      "test": "Fleet list",
+      "expected": "page loads",
+      "actual": "20",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Drivers",
+      "test": "Driver profile",
+      "expected": "loads",
+      "actual": "http://localhost:5173/drivers/6a995caca008ba1abf34f197",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Reports",
+      "test": "Reports page",
+      "expected": "loads no NaN",
+      "actual": "nan=false",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Admin/Reports",
+      "test": "GET /api/reports/summary",
+      "expected": "called in online mode",
+      "actual": "http://localhost:5173/api/reports/summary",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Notifications",
+      "test": "Notifications visible",
+      "expected": "list items",
+      "actual": "6",
+      "pass": "PASS",
+      "evidence": ""
+    },
+    {
+      "area": "Notifications",
+      "test": "Mark all read",
+      "expected": "works",
+      "actual": "clicked",
+      "pass": "PASS",
+      "evidence": ""
+    }
+  ]
+}
