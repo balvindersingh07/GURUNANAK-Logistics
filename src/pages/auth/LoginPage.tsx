@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Shield, ClipboardList, Truck, User } from 'lucide-react';
 import Logo from '../../components/ui/Logo';
 import Button from '../../components/ui/Button';
 import { FormField, inputClass } from '../../components/ui/FormField';
@@ -15,25 +15,28 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; form?: string }>({});
   const [loading, setLoading] = useState(false);
-  const { login, loginAsDemo } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const validate = () => {
+  const validateCredentials = (valueEmail: string, valuePassword: string) => {
     const e: typeof errors = {};
-    if (!email.trim()) e.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = 'Invalid email format';
-    if (!password) e.password = 'Password is required';
-    else if (password.length < 6) e.password = 'Password must be at least 6 characters';
+    if (!valueEmail.trim()) e.email = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valueEmail)) e.email = 'Invalid email format';
+    if (!valuePassword) e.password = 'Password is required';
+    else if (valuePassword.length < 6) e.password = 'Password must be at least 6 characters';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
+  const performLogin = async (loginEmail: string, loginPassword: string) => {
+    setEmail(loginEmail);
+    setPassword(loginPassword);
+    setErrors({});
+    if (!validateCredentials(loginEmail, loginPassword)) return;
+
     setLoading(true);
     try {
-      const result = await login(email, password);
+      const result = await login(loginEmail, loginPassword);
       if (result.success) {
         const stored = JSON.parse(localStorage.getItem('gnk_auth') || '{}');
         navigate(getDashboardPath(stored.role));
@@ -45,10 +48,21 @@ export default function LoginPage() {
     }
   };
 
-  const handleDemo = () => {
-    loginAsDemo();
-    navigate('/dashboard');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await performLogin(email, password);
   };
+
+  const handleDemoLogin = (demoEmail: string, demoPassword: string) => {
+    void performLogin(demoEmail, demoPassword);
+  };
+
+  const demoLoginButtons = [
+    { role: 'admin', label: 'Admin', icon: Shield },
+    { role: 'dispatcher', label: 'Dispatcher', icon: ClipboardList },
+    { role: 'driver', label: 'Driver', icon: Truck },
+    { role: 'customer', label: 'Customer', icon: User },
+  ] as const;
 
   return (
     <div className="min-h-screen flex">
@@ -158,9 +172,28 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <Button variant="outline" className="w-full" onClick={handleDemo}>
-              Continue as Demo User
-            </Button>
+            <div>
+              <p className="text-center text-xs font-medium text-slate-500 mb-3">Quick Demo Login</p>
+              <div className="grid grid-cols-2 gap-2">
+                {demoLoginButtons.map(({ role, label, icon: Icon }) => {
+                  const demoUser = DEMO_USERS.find((u) => u.role === role);
+                  if (!demoUser) return null;
+                  return (
+                    <Button
+                      key={role}
+                      variant="outline"
+                      size="sm"
+                      className="w-full"
+                      disabled={loading}
+                      onClick={() => handleDemoLogin(demoUser.email, demoUser.password)}
+                    >
+                      <Icon size={16} />
+                      {label}
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
 
             <p className="mt-6 text-center text-sm text-slate-500">
               Don&apos;t have an account?{' '}
